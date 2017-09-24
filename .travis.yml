@@ -1,0 +1,3 @@
+language: php
+install: true
+script: tar zcf torrent9.dlm -C ./torrent9 INFO search.php
