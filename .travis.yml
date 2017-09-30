@@ -1,3 +1,13 @@
 language: php
 install: true
-script: tar zcf torrent9.dlm -C ./torrent9 INFO search.php
+script: tar zcf _builds/torrent9.dlm -C ./torrent9 INFO search.php
+before_deploy:
+- export DLMS=$(ls _builds/*.dlm)
+deploy:
+  provider: releases
+  api_key:
+      secure: QJTeiWQh+dlgMrvovAd7/GkUAh7I0cWe4ox/Vfxe6sCby354AJWhXOTh+RgvR8/z6h3xIMf7mzfYiVlCKfqJS51NLGXlahY8mHhN7Mis7Nu7RKfEfo6A9SYnxThbOSC8/0A+ixgYvuXKaGzL1cQVL7wVtbCLHkbR+RtaJ65D9WiTSpZwqOK1OhKQEiGMIrbzuNBB+TmrOUeddG3vtRSuu4cRoWaWlM4Fq24StOn/DOfWZLlMVdST5zcJ5YJ05YA1HR7oXkIm+vqmXzXSsEZvKFfBjUzBRaT4wX0N9fmccBzxHkN4UbwDWJAERz85L6/1QLRNduYQjhr9uTI4KqPXV7kcAwUgoTNZHEqqCk+BR3ZMCECEhBRzmfUpcePsvGlunMDdTEO05Hwqhi9PcADTHqALxNQyLHoVjX/XoophPIdGFupp1Z9vWOlfwjcx7pmrE32crmk5L0JgIFcy+6MpBGQ/zO+4kEhK5Uz388a434+xdyEoaS4fBVX7QBCxaPe4TibXON4yVI2emLThkb5JajQ420A1ke5wL9MfE+wZmC7KGjQZipA1bnSLk6wGrXGa22qoWO2Uz3dB+HEgLjMNdon5onyinNAjIrWq5OtdhSlR2Ix3SAcrZwboparldEQEJa4DS0GDY34402K+V3C/7PHeHAbFYjOyE3nAMljfzjE=
+  file: "${DLMS}"
+  skip_cleanup: true
+  on:
+    tags: true
