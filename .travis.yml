@@ -1,8 +1,8 @@
 language: php
 install: true
-script: tar zcf _builds/torrent9.dlm -C ./torrent9 INFO search.php
+script: tar zcf torrent9.dlm -C ./torrent9 INFO search.php
 before_deploy:
-- export DLMS=$(ls _builds/*.dlm)
+- export DLMS=$(ls *.dlm)
 deploy:
   provider: releases
   api_key:
