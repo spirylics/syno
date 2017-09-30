@@ -1,4 +1,6 @@
 language: php
+php:
+  - '5.6'
 install: true
 before_script: php test.php
 script: tar zcf torrent9.dlm -C ./torrent9 INFO search.php
