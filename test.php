@@ -1,24 +1,34 @@
 <?php
 include 'torrent9/search.php';
 
-class Plugin
+class CheckPlugin
 {
     public function __construct()
     {
     }
 
-    public function addResult($title, $download, $size, $datetime, $page, $hash, $seeds, $leechs, $category) {
+    public function addResult($title, $download, $size, $datetime, $page, $hash, $seeds, $leechs, $category)
+    {
         echo "$title - $download - $size - $datetime - $page - $hash - $seeds - $leechs - $category";
+        assert(!empty($title), "title not found");
+        assert(!empty($download), "download not found");
+        assert(!empty($size), "size not found");
         echo "\n";
     }
 }
 
-$plugin = new Plugin();
+function checkResults($pluginClass, $query)
+{
+    $plugin = new CheckPlugin();
 
-$t9Search = new Torrent9Search();
-$curl = curl_init();
-$t9Search->prepare($curl, 'thrones');
-$response = curl_exec($curl);
-echo $t9Search->parse($plugin, $response);
-curl_close($curl);
+    $search = new $pluginClass();
+    $curl = curl_init();
+    $search->prepare($curl, $query);
+    $response = curl_exec($curl);
+    assert($search->parse($plugin, $response) > 0, "no result found");
+    curl_close($curl);
+}
+
+checkResults("Torrent9Search", 'thrones');
+
 ?>

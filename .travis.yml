@@ -1,5 +1,6 @@
 language: php
 install: true
+before_script: php test.php
 script: tar zcf torrent9.dlm -C ./torrent9 INFO search.php
 before_deploy:
 - export DLMS=$(ls *.dlm)
