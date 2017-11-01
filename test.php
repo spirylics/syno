@@ -13,6 +13,8 @@ class CheckPlugin
         assert(!empty($title), "title not found");
         assert(!empty($download), "download not found");
         assert(!empty($size), "size not found");
+        assert(!empty($seeds), "seeds not found");
+        assert(!empty($leechs), "leechs not found");
         echo "\n";
     }
 }

@@ -35,16 +35,15 @@ class Torrent9Search
         if (!is_null($torrents)) {
             $count = $torrents->length;
             foreach ($torrents as $torrent) {
-                $first = $torrent->childNodes[0];
-                $title = $first->nodeValue;
-                $path = $first->getElementsByTagName('a')->item(0)->getAttribute("href");
+                $title = $xpath->query("./td[1]", $torrent)->item(0)->nodeValue;
+                $path = $xpath->query("./td[1]/a/@href", $torrent)->item(0)->nodeValue;
                 $download = sprintf(self::GET_URL, str_replace("/torrent", '', $path));
-                $size = $this->size_format($torrent->childNodes[2]->nodeValue);
+                $size = $this->size_format($xpath->query("./td[2]", $torrent)->item(0)->nodeValue);
                 $datetime = "";
                 $page = self::BASE_URL . $path;
                 $hash = hash('sha256', $download);
-                $seeds = intval($torrent->childNodes[4]->nodeValue);
-                $leechs = intval($torrent->childNodes[6]->nodeValue);
+                $seeds = intval($xpath->query("./td[3]", $torrent)->item(0)->nodeValue);
+                $leechs = intval($xpath->query("./td[4]", $torrent)->item(0)->nodeValue);
                 $category = "";
                 $plugin->addResult($title, $download, $size, $datetime, $page, $hash, $seeds, $leechs, $category);
             }

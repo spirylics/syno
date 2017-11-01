@@ -2,7 +2,7 @@
   "name": "torrent9",
   "displayname": "Torrent9",
   "description": "Torrent9 tracker Search",
-  "version": "0.1",
+  "version": "0.2",
   "site": "http://www.torrent9.pe/",
   "module": "search.php",
   "type": "search",
